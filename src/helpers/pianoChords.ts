@@ -1,4 +1,4 @@
-{
+let pianoChords = JSON.parse(`{
   "pianoChords": [
     {
       "type" : "Do",
@@ -71,7 +71,7 @@
             {"name": "Sol#"},
             {"name": "Si"}
           ]
-        },
+        }
       ]
     },
     {
@@ -627,4 +627,6 @@
       ]
     }
   ]
-}
+}`);
+
+export {pianoChords};

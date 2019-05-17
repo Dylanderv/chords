@@ -1,0 +1,30 @@
+app-selector {
+  /* Component styles go here */
+}
+
+.selected {
+  color: blue;
+  animation-duration: 1s;
+  animation-name: changeColor;
+}
+
+span {
+  animation-duration: 2s;
+  animation-name: fadeIn;
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+} 
+
+@keyframes changeColor{
+  /* Start from red */
+  from {
+    color: black;
+  }
+  /* Go to yellow */
+  to {
+    color: blue;
+  }
+}

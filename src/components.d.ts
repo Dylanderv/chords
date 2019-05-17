@@ -7,62 +7,65 @@
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import { JSX } from '@stencil/core';
+import {
+  IChord,
+} from './model/IChord';
 
 
 export namespace Components {
-  interface AppHome {}
-  interface AppProfile {
-    'name': string;
+  interface AppChord {
+    'chord': IChord;
   }
+  interface AppChords {}
   interface AppRoot {}
+  interface AppSelector {
+    'list': string[];
+  }
 }
 
 declare namespace LocalJSX {
-  interface AppHome extends JSXBase.HTMLAttributes {}
-  interface AppProfile extends JSXBase.HTMLAttributes {
-    'name'?: string;
+  interface AppChord extends JSXBase.HTMLAttributes {
+    'chord'?: IChord;
   }
+  interface AppChords extends JSXBase.HTMLAttributes {}
   interface AppRoot extends JSXBase.HTMLAttributes {}
-
-  interface ElementInterfaces {
-    'AppHome': Components.AppHome;
-    'AppProfile': Components.AppProfile;
-    'AppRoot': Components.AppRoot;
+  interface AppSelector extends JSXBase.HTMLAttributes {
+    'list'?: string[];
+    'onSelectedChanged'?: (event: CustomEvent<any>) => void;
   }
 
   interface IntrinsicElements {
-    'AppHome': LocalJSX.AppHome;
-    'AppProfile': LocalJSX.AppProfile;
-    'AppRoot': LocalJSX.AppRoot;
+    'app-chord': AppChord;
+    'app-chords': AppChords;
+    'app-root': AppRoot;
+    'app-selector': AppSelector;
   }
 }
+
 export { LocalJSX as JSX };
+
 
 declare module "@stencil/core" {
   export namespace JSX {
-    interface ElementInterfaces extends LocalJSX.ElementInterfaces {}
     interface IntrinsicElements extends LocalJSX.IntrinsicElements {}
   }
 }
 
+
 declare global {
 
-  // Adding a global JSX for backcompatibility with legacy dependencies
-  export namespace JSX {
-    export interface Element {}
-  }
 
 
-  interface HTMLAppHomeElement extends Components.AppHome, HTMLStencilElement {}
-  var HTMLAppHomeElement: {
-    prototype: HTMLAppHomeElement;
-    new (): HTMLAppHomeElement;
+  interface HTMLAppChordElement extends Components.AppChord, HTMLStencilElement {}
+  var HTMLAppChordElement: {
+    prototype: HTMLAppChordElement;
+    new (): HTMLAppChordElement;
   };
 
-  interface HTMLAppProfileElement extends Components.AppProfile, HTMLStencilElement {}
-  var HTMLAppProfileElement: {
-    prototype: HTMLAppProfileElement;
-    new (): HTMLAppProfileElement;
+  interface HTMLAppChordsElement extends Components.AppChords, HTMLStencilElement {}
+  var HTMLAppChordsElement: {
+    prototype: HTMLAppChordsElement;
+    new (): HTMLAppChordsElement;
   };
 
   interface HTMLAppRootElement extends Components.AppRoot, HTMLStencilElement {}
@@ -70,16 +73,20 @@ declare global {
     prototype: HTMLAppRootElement;
     new (): HTMLAppRootElement;
   };
+
+  interface HTMLAppSelectorElement extends Components.AppSelector, HTMLStencilElement {}
+  var HTMLAppSelectorElement: {
+    prototype: HTMLAppSelectorElement;
+    new (): HTMLAppSelectorElement;
+  };
+
   interface HTMLElementTagNameMap {
-    'app-home': HTMLAppHomeElement
-    'app-profile': HTMLAppProfileElement
-    'app-root': HTMLAppRootElement
+    'app-chord': HTMLAppChordElement;
+    'app-chords': HTMLAppChordsElement;
+    'app-root': HTMLAppRootElement;
+    'app-selector': HTMLAppSelectorElement;
   }
 
-  interface ElementTagNameMap {
-    'app-home': HTMLAppHomeElement;
-    'app-profile': HTMLAppProfileElement;
-    'app-root': HTMLAppRootElement;
-  }
+  interface ElementTagNameMap extends HTMLElementTagNameMap {}
 }
 
